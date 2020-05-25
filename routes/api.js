@@ -1,19 +1,15 @@
-var express = require("express");
-var router = express.Router();
-var Table = require("../controller");
+var fs = require("fs");
+var router = require("express").Router();
 
-// 实例化user表
-var user = new Table("user");
-
-/* GET api listing. */
-router.get("/", function(req, res, next) {
-  res.send("respond with a resource");
-});
-
-router.post("/selUserList", function(req, res, next) {
-  user.get(data => {
-    console.log(data);
-    res.json(data);
+//读取文件目录
+fs.readdir("routes/modules", function (err, files) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  files.forEach(function (file) {
+    var routerModules = require("./modules/" + file);
+    routerModules && routerModules(router);
   });
 });
 

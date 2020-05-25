@@ -1,15 +1,8 @@
-var express = require("express");
-var router = express.Router();
-var Table = require("../controller");
-
-// 实例化user表
-var user = new Table("user");
+var router = require("express").Router();
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-  user.get(data => {
-    res.render("index", { title: JSON.stringify(data) });
-  }, 123);
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "接口" });
 });
 
 module.exports = router;
